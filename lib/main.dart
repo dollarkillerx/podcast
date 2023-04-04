@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
     return GetMaterialApp(
-      title: "Komi VPN",
+      title: "Podcast",
       // 默认路由
       initialRoute: AppPages.InitRoute,
       // 页面表
