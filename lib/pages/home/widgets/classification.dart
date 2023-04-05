@@ -6,9 +6,10 @@ import '../../../models/g_response.dart';
 
 class Classification extends StatefulWidget {
   RxInt index;
+  final GestureTapCallback? onTap;
   List<ClassificationModel> classifications = ClassificationModel.genFake();
 
-  Classification({Key? key, required this.index}) : super(key: key);
+  Classification({Key? key, required this.index, this.onTap}) : super(key: key);
 
   @override
   State<Classification> createState() => _ClassificationState();
@@ -26,6 +27,9 @@ class _ClassificationState extends State<Classification> {
             return GestureDetector(
               onTap: () {
                 widget.index.value = index;
+                if (widget.onTap != null) {
+                  widget.onTap!();
+                }
               },
               child: Obx(() => Container(
                     child: Text(

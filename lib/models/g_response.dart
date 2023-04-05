@@ -186,11 +186,10 @@ class ClassificationModel {
 
   static List<ClassificationModel> genFake() {
     return [
-      ClassificationModel("recommend", "推荐"),
+      ClassificationModel("recommend", "热门🔥推荐"),
       ClassificationModel("novel", "有声小说"),
       ClassificationModel("logic", "逻辑思维"),
-      ClassificationModel("hot", "热门🔥"),
-      ClassificationModel("update", "提升自我"),
+      ClassificationModel("hot", "点击榜"),
     ];
   }
 }
