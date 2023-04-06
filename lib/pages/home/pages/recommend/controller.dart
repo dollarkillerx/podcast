@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:podcast/pages/home/pages/recommend/provider.dart';
 
 class RecommendController extends GetxController {
   var classificationAction = 0.obs;
+  var loading = true.obs;
 
   var carousel = [
     "https://imagev2.xmcdn.com/storages/a8c8-audiofreehighqps/43/B2/GMCoOSIH_DZVAAtXuwIJFC7H.png",
@@ -15,6 +17,7 @@ class RecommendController extends GetxController {
     "热点🔥",
     "有声小说",
     "逻辑思维",
+    "德云社",
   ];
 
   var searchs = [
@@ -22,7 +25,16 @@ class RecommendController extends GetxController {
     "热点🔥",
     "有声小说",
     "逻辑思维",
+    "德云社",
   ];
 
   var pageController = PageController(initialPage: 0);
+
+  RecommendProvider provider = Get.find();
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
 }

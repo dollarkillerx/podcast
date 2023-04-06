@@ -1,21 +1,38 @@
 import '../../../../common/library/base_provider.dart';
 
 class RecommendProvider extends BaseProvider {
-  friendships() => gQuery(graphSQL: userListSQL);
+  homePage(String pageClass) => gQuery(graphSQL: homePageSQL, variables: {
+        "class": pageClass,
+      });
 }
 
-var userListSQL = '''
-query friendships {
-  friendship {
-    friendships {
-      accountId
-      account
-      fullName
-      nickName
-      birthday
-      email
-      about
-      avatar
+var homePageSQL = '''
+query homePage(\$class: HomePageClass!) {
+  homePage(class: \$class) {
+    carousel {
+      img
+      title
+      ad
+      jumpType
+      jumpUrl
+    }
+    boxs{
+      title
+      books{
+        id
+        title
+        subTitle
+        img
+        score
+        end
+        episode
+        author{
+          id
+          name
+          avatar
+        }
+      }
+      arrangement
     }
   }
 }

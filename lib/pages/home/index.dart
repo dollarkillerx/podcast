@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:podcast/common/library/parse.dart';
 import '../../widgets/rimg.dart';
 import './pages/recommend/index.dart';
 import 'controller.dart';
@@ -13,7 +14,9 @@ class HomePage extends GetView<HomeController> {
               index: controller.navigationBarAction.value,
               children: [
                 RecommendPage(),
-                Scaffold(),
+                Scaffold(
+                  body: Center(child: Text(decodeString("104*116*116*112*115*58*47*47*109*112*51*46*116*105*110*103*50*55*53*46*99*111*109*47*49*51*51*52*53*95*55*52*49*57*51*49*57*48*47*54*48*57*50*56*49*53*53*54*46*109*52*97"))),
+                ),
               ],
             )),
         floatingActionButton: Container(
