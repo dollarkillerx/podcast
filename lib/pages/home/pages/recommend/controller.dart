@@ -9,12 +9,8 @@ class RecommendController extends GetxController {
   var classificationAction = 0.obs;
   var loading = true.obs;
   HomePageResponse? popular; // 热门 页数据
+  HomePageResponse? crosstalk; // 相声 页数据
 
-  var carousel = [
-    "https://imagev2.xmcdn.com/storages/a8c8-audiofreehighqps/43/B2/GMCoOSIH_DZVAAtXuwIJFC7H.png",
-    "https://imagev2.xmcdn.com/storages/784a-audiofreehighqps/30/A5/GKwRIJIH_DmDAAENGQIJFXOG.jpg",
-    "https://imagev2.xmcdn.com/storages/fff2-audiofreehighqps/75/CF/GMCoOSUH_DdnAAHH0wIJFLJM.jpg"
-  ];
 
   var subClassification = [
     "推荐",
@@ -53,6 +49,20 @@ class RecommendController extends GetxController {
       HomePageResponse ds = HomePageResponse.fromJson(gResponse.GetData()!);
       popular = ds;
       // update();
+    }
+
+    GResponse gResponse2 = await provider.homePage("Crosstalk");
+    if (gResponse2.GetError() != null) {
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text(gResponse2.GetError()!.message),
+      ));
+      return;
+    }
+
+    if (gResponse2.GetData() != null) {
+      HomePageResponse ds = HomePageResponse.fromJson(gResponse2.GetData()!);
+      crosstalk = ds;
     }
 
 

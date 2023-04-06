@@ -45,12 +45,8 @@ class RecommendPage extends GetView<RecommendController> {
                 controller: controller.pageController,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  _rendering(),
-                  Container(
-                    child: Center(
-                      child: Text("相声"),
-                    ),
-                  ),
+                  _rendering(controller.popular!),
+                  _rendering(controller.crosstalk!),
                   Container(
                     child: Center(
                       child: Text("有声小说"),
@@ -75,7 +71,7 @@ class RecommendPage extends GetView<RecommendController> {
     });
   }
 
-  Widget _rendering() {
+  Widget _rendering(HomePageResponse hpr) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -85,26 +81,26 @@ class RecommendPage extends GetView<RecommendController> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    if (controller.popular!.carousel
+                    if (hpr.carousel
                             .elementAt(index)
                             .jumpType ==
                         JumpType.InApp) {
-                    } else if (controller.popular!.carousel
+                    } else if (hpr.carousel
                             .elementAt(index)
                             .jumpType ==
                         JumpType.Web) {
-                      launchUrl(Uri.parse(controller.popular!.carousel
+                      launchUrl(Uri.parse(hpr.carousel
                           .elementAt(index)
                           .jumpUrl));
                     }
                   },
                   child: Image.network(
-                    controller.popular!.carousel.elementAt(index).img,
+                    hpr.carousel.elementAt(index).img,
                     fit: BoxFit.fill,
                   ),
                 );
               },
-              itemCount: controller.popular!.carousel.length,
+              itemCount: hpr.carousel.length,
               pagination: SwiperPagination(
                 builder: DotSwiperPaginationBuilder(
                     color: Colors.grey, activeColor: Colors.white),
@@ -113,7 +109,7 @@ class RecommendPage extends GetView<RecommendController> {
               duration: 500,
             ),
           ),
-          ...controller.popular!.boxs.map((e) => Recommend(
+          ...hpr.boxs.map((e) => Recommend(
                 title: e.title,
                 box: e,
                 boxArrangement: e.arrangement,
