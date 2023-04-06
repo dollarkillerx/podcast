@@ -2,7 +2,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:podcast/models/g_homepage.dart';
-import '../../../../models/g_response.dart';
 import '../../widgets/classification.dart';
 import '../../widgets/recommend.dart';
 import '../../widgets/search.dart';
