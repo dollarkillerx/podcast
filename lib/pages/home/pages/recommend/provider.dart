@@ -26,6 +26,7 @@ query homePage(\$class: HomePageClass!) {
         score
         end
         episode
+        views
         author{
           id
           name

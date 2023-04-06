@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:podcast/models/g_homepage.dart';
 import 'package:podcast/pages/home/pages/recommend/provider.dart';
+
+import '../../../../models/g_response.dart';
 
 class RecommendController extends GetxController {
   var classificationAction = 0.obs;
   var loading = true.obs;
+  HomePageResponse? popular; // 热门 页数据
 
   var carousel = [
     "https://imagev2.xmcdn.com/storages/a8c8-audiofreehighqps/43/B2/GMCoOSIH_DZVAAtXuwIJFC7H.png",
@@ -33,8 +37,26 @@ class RecommendController extends GetxController {
   RecommendProvider provider = Get.find();
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
-  }
 
+    GResponse gResponse = await provider.homePage("Popular");
+    if (gResponse.GetError() != null) {
+      Get.dialog(AlertDialog(
+        title: Text("Error"),
+        content: Text(gResponse.GetError()!.message),
+      ));
+      return;
+    }
+
+    if (gResponse.GetData() != null) {
+      HomePageResponse ds = HomePageResponse.fromJson(gResponse.GetData()!);
+      popular = ds;
+      // update();
+    }
+
+
+    loading.value = false;
+    update();
+  }
 }

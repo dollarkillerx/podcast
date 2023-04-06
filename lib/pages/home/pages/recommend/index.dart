@@ -1,12 +1,14 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:podcast/models/g_homepage.dart';
 import '../../../../models/g_response.dart';
 import '../../widgets/classification.dart';
 import '../../widgets/recommend.dart';
 import '../../widgets/search.dart';
 import 'controller.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RecommendPage extends GetView<RecommendController> {
   @override
@@ -82,12 +84,28 @@ class RecommendPage extends GetView<RecommendController> {
             height: 200,
             child: Swiper(
               itemBuilder: (BuildContext context, int index) {
-                return Image.network(
-                  controller.carousel.elementAt(index),
-                  fit: BoxFit.fill,
+                return GestureDetector(
+                  onTap: () {
+                    if (controller.popular!.carousel
+                            .elementAt(index)
+                            .jumpType ==
+                        JumpType.InApp) {
+                    } else if (controller.popular!.carousel
+                            .elementAt(index)
+                            .jumpType ==
+                        JumpType.Web) {
+                      launchUrl(Uri.parse(controller.popular!.carousel
+                          .elementAt(index)
+                          .jumpUrl));
+                    }
+                  },
+                  child: Image.network(
+                    controller.popular!.carousel.elementAt(index).img,
+                    fit: BoxFit.fill,
+                  ),
                 );
               },
-              itemCount: controller.carousel.length,
+              itemCount: controller.popular!.carousel.length,
               pagination: SwiperPagination(
                 builder: DotSwiperPaginationBuilder(
                     color: Colors.grey, activeColor: Colors.white),
@@ -96,9 +114,11 @@ class RecommendPage extends GetView<RecommendController> {
               duration: 500,
             ),
           ),
-          Recommend(
-            recommends: RecommendModel.genFake(),
-          ),
+          ...controller.popular!.boxs.map((e) => Recommend(
+                title: e.title,
+                box: e,
+                boxArrangement: e.arrangement,
+              ))
         ],
       ),
     );
