@@ -1,21 +1,22 @@
 import '../../common/library/base_provider.dart';
 
 class MusicDetailsProvider extends BaseProvider {
-  friendships() => gQuery(graphSQL: userListSQL);
+  chapter(String id, bool asc, int offset) => gQuery(graphSQL: chapterSQL, variables: {
+    "id": id,
+    "asc": asc,
+    "offset": offset,
+  });
 }
 
-var userListSQL = '''
-query friendships {
-  friendship {
-    friendships {
-      accountId
-      account
-      fullName
-      nickName
-      birthday
-      email
-      about
-      avatar
+var chapterSQL = '''
+query chapter(\$id: String!, \$asc: Boolean!, \$offset: Int64!) {
+  chapter(id: \$id, asc: \$asc, offset: \$offset) {
+    total
+    chapters{
+      index
+      title
+      views
+      playUrl
     }
   }
 }

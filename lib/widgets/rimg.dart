@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podcast/services/audio_service.dart';
 
 class RIMGWidget extends StatefulWidget {
   int duration;
@@ -14,7 +15,7 @@ class _RIMGWidgetState extends State<RIMGWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   double _angle = 0;
-  bool playing = true;
+  bool playing = AudioService().playing();
 
   @override
   void initState() {
@@ -41,12 +42,14 @@ class _RIMGWidgetState extends State<RIMGWidget>
       onTap: () {
         if (playing) {
           _controller.stop();
+          AudioService().pause();
           playing = !playing;
           return;
         }
         _controller.forward();
         _controller.repeat();
         playing = !playing;
+        AudioService().play();
       },
       child: Container(
         child: Transform.rotate(

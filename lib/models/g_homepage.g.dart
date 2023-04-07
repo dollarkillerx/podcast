@@ -100,3 +100,31 @@ const _$JumpTypeEnumMap = {
   JumpType.Web: 'Web',
   JumpType.None: 'None',
 };
+
+ChapterResponse _$ChapterResponseFromJson(Map<String, dynamic> json) =>
+    ChapterResponse(
+      total: json['total'] as int,
+      chapters: (json['chapters'] as List<dynamic>)
+          .map((e) => Chapter.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ChapterResponseToJson(ChapterResponse instance) =>
+    <String, dynamic>{
+      'total': instance.total,
+      'chapters': instance.chapters,
+    };
+
+Chapter _$ChapterFromJson(Map<String, dynamic> json) => Chapter(
+      index: json['index'] as int,
+      title: json['title'] as String,
+      views: json['views'] as int,
+      playUrl: json['playUrl'] as String,
+    );
+
+Map<String, dynamic> _$ChapterToJson(Chapter instance) => <String, dynamic>{
+      'index': instance.index,
+      'title': instance.title,
+      'views': instance.views,
+      'playUrl': instance.playUrl,
+    };

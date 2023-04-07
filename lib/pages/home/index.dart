@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:podcast/common/library/parse.dart';
-import '../../widgets/rimg.dart';
+import 'package:podcast/services/audio_service.dart';
 import './pages/recommend/index.dart';
 import 'controller.dart';
 
@@ -19,17 +19,7 @@ class HomePage extends GetView<HomeController> {
                 ),
               ],
             )),
-        floatingActionButton: Container(
-          width: 70,
-          height: 70,
-          child: RIMGWidget(
-              "https://imagev2.xmcdn.com/group47/M05/53/60/wKgKk1ufEHXxZnLQAAKdqZFMMEU542.jpg"),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            color: Colors.orange,
-          ),
-          clipBehavior: Clip.antiAlias,
-        ),
+        floatingActionButton: AudioService().toRotate(),
         bottomNavigationBar: Obx(() => BottomNavigationBar(
               selectedFontSize: 15,
               unselectedFontSize: 15,

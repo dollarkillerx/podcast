@@ -123,3 +123,34 @@ enum JumpType {
   None,
 }
 
+
+@JsonSerializable()
+class ChapterResponse {
+  final int total;
+  final List<Chapter> chapters;
+
+  ChapterResponse({required this.total, required this.chapters});
+
+  factory ChapterResponse.fromJson(Map<String, dynamic> json) =>
+      _$ChapterResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChapterResponseToJson(this);
+}
+
+@JsonSerializable()
+class Chapter {
+  final int index;
+  final String title;
+  final int views;
+  final String playUrl;
+
+  Chapter(
+      {required this.index,
+        required this.title,
+        required this.views,
+        required this.playUrl});
+
+  factory Chapter.fromJson(Map<String, dynamic> json) => _$ChapterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChapterToJson(this);
+}

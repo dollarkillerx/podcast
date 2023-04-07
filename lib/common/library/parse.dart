@@ -25,3 +25,8 @@ String formatNum(int num) {
     return '${(num / 100000000).toStringAsFixed(2)}亿';
   }
 }
+
+String formatSecondsToMinutes(int seconds) {
+  Duration duration = Duration(seconds: seconds);
+  return '${duration.inHours}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+}
